@@ -1,8 +1,8 @@
 <template>
-  <main class="index">
+  <div class="loader" v-if="!recipes.length">Loading...</div>
+  <main v-else>
     <h1>Recipes</h1>
-    <div class="loader" v-if="!recipes.length">Loading...</div>
-    <section class="card_container" v-else>
+    <section class="card_container">
       <CardComponent
         v-for="recipe in recipes"
         :key="recipe.id"

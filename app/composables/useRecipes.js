@@ -12,17 +12,16 @@ export const useRecipes = () => {
     recipe.value = response.data.recipe;
   }
 
-  async function createRecipe({ name, email }) {
-    const response = await $fetch("/api/recipe", {
+  async function writeRecipe(dataObject) {
+    const response = await $fetch("/api/recipe/write", {
       method: "POST",
-      body: { name, email },
+      body: dataObject,
     });
   }
-
   return {
     fetchRecipes,
     fetchRecipe,
-    createRecipe,
+    writeRecipe,
     recipes,
     recipe,
   };

@@ -11,12 +11,14 @@
   },
   "dependencies": {
     "@nuxt/a11y": "1.0.0-alpha.1",
-    "@nuxt/content": "3.10.0",
     "@nuxt/eslint": "1.12.1",
     "@nuxt/fonts": "0.12.1",
     "@nuxt/image": "2.0.0",
     "eslint": "^9.0.0",
+    "module": "^2.0.0",
+    "nuxi": "^3.32.0",
     "nuxt": "^4.2.2",
+    "security": "^1.0.0",
     "vue": "^3.5.26",
     "vue-router": "^4.6.4"
   }
