@@ -1,7 +1,10 @@
 <template>
   <main class="index">
     <h1>New recipe</h1>
+    <FormRecipeComponent />
   </main>
 </template>
 
-<script setup></script>
+<script></script>
+
+<style lang="css" scoped></style>
