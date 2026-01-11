@@ -5,7 +5,7 @@
       :formfieldData="{
         label: 'Title',
         placeholder: getRecipePlaceholderName(),
-        required: 'true',
+        requiredField: true,
       }"
     />
     <FormInputComponent
@@ -13,10 +13,27 @@
       :formfieldData="{
         label: 'Description',
         placeholder: 'A short description of the recipe',
-        required: 'false',
+        requiredField: false,
       }"
     />
-    <button type="submit">Text</button>
+    <fieldset>
+      <legend>Ingredients</legend>
+      <ul class="expandableList">
+        <li>
+          <FormInputComponent
+            v-model="formData.ingredient"
+            :formfieldData="{
+              label: 'Ingredient',
+              labelHidden: true,
+              placeholder: '',
+              requiredField: false,
+            }"
+          />
+        </li>
+      </ul>
+    </fieldset>
+
+    <button type="submit">Save recipe</button>
   </form>
 </template>
 
@@ -104,13 +121,62 @@ function getRecipePlaceholderName() {
 const handleSubmit = function () {
   writeRecipe(formData.value);
 };
+
+function getExpandableLists() {
+  const listInputs = [];
+  document.querySelectorAll(".expandableList").forEach((list) => {
+    list.addEventListener("focusout", (event) => {
+      list.contains(event.relatedTarget)? null : cleanUpExpandableList(list);
+    });
+    list.querySelectorAll("li").forEach((item) => {
+      const input = {
+        parent: list,
+        element: item,
+        input: item.querySelector("input"),
+      };
+      listInputs.push(input);
+    });
+  });
+  return listInputs;
+}
+
+function inputEventListener(item) {
+  item.input.addEventListener("input", appendToExpandableList.bind(null, item));
+}
+
+function appendToExpandableList(item) {
+  if (item.input.value !== "") {
+    const lastItem = item.parent.querySelector("li:last-child input");
+    if (lastItem.value !== "") {
+      const newItem = item.element.cloneNode(true);
+      item.parent.appendChild(newItem);
+      const newInput = newItem.querySelector("input");
+      newInput.value = "";
+      inputEventListener({
+        parent: item.parent,
+        element: newItem,
+        input: newInput,
+      });
+    }
+  }
+}
+
+function cleanUpExpandableList(parent) {
+  const items = parent.querySelectorAll("li");
+  items.forEach((item, index) => {
+    const input = item.querySelector("input");
+    if (input.value === "" && index < items.length - 1) {
+      parent.removeChild(item);
+    }
+  });
+}
+
+onMounted(() => {
+  const listInputs = getExpandableLists();
+  listInputs.forEach((item) => {
+    inputEventListener(item);
+  });
+});
 </script>
 
-<style lang="css" scoped>
-form {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-}
-</style>
+<style lang="css" scoped></style>
