@@ -1,8 +1,9 @@
 <template>
-  <div class="loader" v-if="!recipes.length">Loading...</div>
-  <main v-else>
+  <main>
     <h1>Recipes</h1>
-    <section class="card_container">
+    <div class="loader" v-if="status == null">Loading...</div>
+    <div class="loader" v-else-if="recipes.length == 0">No recipes found</div>
+    <section class="card_container" v-else>
       <CardComponent
         v-for="recipe in recipes"
         :key="recipe.id"
@@ -13,7 +14,7 @@
 </template>
 
 <script setup>
-const { recipes, fetchRecipes } = useRecipes();
+const { recipes, status, fetchRecipes } = useRecipes();
 
 onMounted(() => {
   fetchRecipes();

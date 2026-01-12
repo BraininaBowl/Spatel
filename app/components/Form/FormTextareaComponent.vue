@@ -7,8 +7,9 @@
       >{{ formfieldData.label }}</label
     >
     <label :for="formfieldData.id" v-else>{{ formfieldData.label }}</label>
-    <input
-      type="text"
+    <p v-if="formfieldData.help" class="help-text">{{ formfieldData.help }}</p>
+    <textarea
+      rows="3"
       :id="formfieldData.id"
       :placeholder="formfieldData.placeholder"
       v-model="model"
@@ -27,4 +28,9 @@ defineProps({
 });
 </script>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+  textarea {
+    field-sizing: content;
+    width: 100%;
+  }
+</style>
