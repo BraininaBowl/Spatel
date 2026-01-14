@@ -1,10 +1,12 @@
 <template>
   <main class="index">
     <h1>New recipe</h1>
-    <FormRecipeComponent />
+    <FormRecipeComponent :recipe="new Object()"/>
   </main>
 </template>
 
-<script></script>
+<script setup>
+  
+</script>
 
 <style lang="css" scoped></style>

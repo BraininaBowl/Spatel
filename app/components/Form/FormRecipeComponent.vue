@@ -22,6 +22,7 @@
       v-model="formData.ingredients"
       :formfieldData="{
         label: 'Ingredients',
+        help: 'One item per line.',
         placeholder: formIngredientsPlaceholder,
         requiredField: true,
         id: useId(),
@@ -53,10 +54,17 @@
 
 <script setup>
 import { addNotification } from "~/layouts/default.vue";
+
+const props = defineProps({
+   recipe: {
+     type: Object,
+     required: false,
+   },
+ });
+const recipe = props.recipe || {};
+
+
 const { writeRecipe } = useRecipes();
-const formData = ref({
-  author: "default",
-});
 
 const handleSubmit = function () {
   const status = writeRecipe(formData.value);
@@ -68,13 +76,23 @@ const handleSubmit = function () {
   });
 };
 
+const formData = ref({
+  author: "default",
+  id: recipe.id ? recipe.id : null,
+  title: recipe.title ? recipe.title : "",
+  description: recipe.description ? recipe.description : "",
+  ingredients: recipe.ingredients ? recipe.ingredients : "",
+  instructions: recipe.instructions ? recipe.instructions : "",
+  notes: recipe.notes ? recipe.notes : "",
+});
+
+/* Helper functions to generate placeholder text */
 function getRandomItemFromArray(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 function toSentenceCase(text) {
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
-
 function getRecipePlaceholderName() {
   const pre = [
     "scrumptious",
@@ -337,7 +355,6 @@ function getRecipePlaceholderNotes() {
   ];
   return getRandomItemFromArray(notes);
 }
-
 const formTitlePlaceholder = getRecipePlaceholderName();
 const formDescriptionPlaceholder = getRecipePlaceholderDescription();
 const formIngredientsPlaceholder = getRecipePlaceholderIngredients();

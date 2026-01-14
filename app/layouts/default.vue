@@ -21,7 +21,11 @@ function addNotification(message, type = "info") {
   }
 }
 
-export { addNotification };
+function returnUri(string) {
+  return encodeURIComponent(string.trim().toLowerCase().replace(/\s+/g, "-"));
+}
+
+export { addNotification, returnUri };
 </script>
 
 <script setup>
@@ -59,6 +63,10 @@ body {
   line-height: 1.4rem;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 .default_template {
   font-family: "PT Serif", serif;
   font-size: 1rem;
@@ -83,8 +91,9 @@ a {
   color: var(--col-link);
   text-decoration: none;
   transition: color 0.2s;
+  display: inline-block;
 }
-a::after {
+a:not(.card)::after {
   content: "";
   display: block;
   border-bottom: 1px solid var(--col-link-hover);
@@ -118,6 +127,7 @@ button,
 button:hover,
 .button:hover {
   background-color: var(--col-link-hover);
+  color: var(--col-button-text);
   border-radius: 1rem;
   box-shadow:
     0 0.3rem 0.6rem rgba(0, 0, 0, 0.2),

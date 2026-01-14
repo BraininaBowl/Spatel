@@ -3,7 +3,9 @@
   <article class="recipe" v-else>
     <header>
       <h1 v-if="recipe.title">{{ recipe.title }}</h1>
+      <NuxtLink :to="`/${recipe.id}-${returnUri(recipe.title)}/edit`">Edit</NuxtLink>
     </header>
+    <main>
     <section v-if="recipe.description">
       <h4>Description</h4>
       <p>{{ recipe.description }}</p>
@@ -20,10 +22,12 @@
       <h4>Notes</h4>
       <p>{{ recipe.notes }}</p>
     </section>
+    </main>
   </article>
 </template>
 
 <script setup>
+import { returnUri } from "~/layouts/default.vue";
 const route = useRoute();
 const recipeId = route.params.id;
 const { recipe, fetchRecipe, fetchRecipes } = useRecipes();
@@ -37,7 +41,7 @@ onMounted(() => {
 });
 </script>
 <style lang="css" scoped>
-.recipe {
+.recipe, .recipe main {
   display: flex;
   flex-direction: column;
   gap: 1rem;
