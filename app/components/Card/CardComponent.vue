@@ -1,5 +1,5 @@
 <template>
-  <NuxtLink :to="`/${recipe.id}-${returnUri(recipe.title)}`" class="card"  :title="recipe.description">
+  <NuxtLink :to="`/${recipe.id}-${returnUri(recipe.title)}`" class="card" :title="recipe.description">
     <h3>
       {{ recipe.title }}
     </h3>

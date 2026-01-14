@@ -9,6 +9,12 @@ export const useRecipes = () => {
     status.value = response.status;
   }
 
+  async function fetchTrashed() {
+    const response = await $fetch("/api/trashed");
+    recipes.value = response.data.recipes;
+    status.value = response.status;
+  }
+
   async function fetchRecipe(id) {
     const response = await $fetch(`/api/recipe/${id}`);
     recipe.value = response.data.recipe;
@@ -23,6 +29,7 @@ export const useRecipes = () => {
   }
   return {
     fetchRecipes,
+    fetchTrashed,
     fetchRecipe,
     writeRecipe,
     recipes,

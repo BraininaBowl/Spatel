@@ -13,6 +13,7 @@
       :placeholder="formfieldData.placeholder"
       v-model="model"
       :required="formfieldData.requiredField"
+      :disabled="formfieldData.disabledField"
     />
   </div>
 </template>

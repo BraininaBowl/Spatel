@@ -38,6 +38,10 @@ const navItems = [
     to: "/New",
     label: "New recipe",
   },
+  {
+    to: "/Trash",
+    label: "Trash",
+  },
 ];
 </script>
 
@@ -111,7 +115,7 @@ a:hover::after {
 button,
 .button {
   font-family: "PT Serif", serif;
-  margin: 1rem 0 0;
+  margin: 0;
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 0.5rem;
@@ -138,6 +142,14 @@ button::before,
 .button::before {
   content: "▸ ";
   margin-left: -0.3rem;
+}
+
+.button-row {
+  margin: 2rem 0 0;
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
 }
 
 /* Notifications */

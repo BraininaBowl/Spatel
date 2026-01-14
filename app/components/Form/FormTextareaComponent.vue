@@ -14,6 +14,7 @@
       :placeholder="formfieldData.placeholder"
       v-model="model"
       :required="formfieldData.requiredField"
+      :disabled="formfieldData.disabledField"
     />
   </div>
 </template>
@@ -29,8 +30,8 @@ defineProps({
 </script>
 
 <style lang="css" scoped>
-  textarea {
-    field-sizing: content;
-    width: 100%;
-  }
+textarea {
+  field-sizing: content;
+  width: 100%;
+}
 </style>

@@ -7,6 +7,7 @@
         placeholder: formTitlePlaceholder,
         requiredField: true,
         id: useId(),
+        disabledField: formData.trashed
       }"
     />
     <FormTextareaComponent
@@ -16,6 +17,7 @@
         placeholder: formDescriptionPlaceholder,
         requiredField: false,
         id: useId(),
+        disabledField: formData.trashed
       }"
     />
     <FormTextareaComponent
@@ -26,6 +28,7 @@
         placeholder: formIngredientsPlaceholder,
         requiredField: true,
         id: useId(),
+        disabledField: formData.trashed
       }"
     />
     <FormTextareaComponent
@@ -36,6 +39,7 @@
         placeholder: formInstructionsPlaceholder,
         requiredField: true,
         id: useId(),
+        disabledField: formData.trashed
       }"
     />
     <FormTextareaComponent
@@ -45,10 +49,26 @@
         placeholder: formNotesPlaceholder,
         requiredField: false,
         id: useId(),
+        disabledField: formData.trashed
       }"
     />
 
-    <button type="submit">Save recipe</button>
+    <div class="button-row">
+      <button type="submit" v-if="recipe.trashed !== true">Save recipe</button>
+      <a
+        class="button"
+        @click="restoreRecipe()"
+        v-if="recipe.id !== null && recipe.trashed"
+        >Restore recipe</a
+      >
+      <a
+        class="button"
+        @click="trashRecipe()"
+        v-if="recipe.trashed !== true && recipe.id !== null"
+        >Trash recipe</a
+      >
+      <NuxtLink to="./">Cancel</NuxtLink>
+    </div>
   </form>
 </template>
 
@@ -56,13 +76,12 @@
 import { addNotification } from "~/layouts/default.vue";
 
 const props = defineProps({
-   recipe: {
-     type: Object,
-     required: false,
-   },
- });
+  recipe: {
+    type: Object,
+    required: false,
+  },
+});
 const recipe = props.recipe || {};
-
 
 const { writeRecipe } = useRecipes();
 
@@ -76,6 +95,30 @@ const handleSubmit = function () {
   });
 };
 
+const trashRecipe = function () {
+  recipe.trashed = true;
+  formData.value.trashed = true;
+  const status = writeRecipe(formData.value);
+  status.catch((error) => {
+    addNotification("Error trashing recipe, please try again later.", "error");
+  });
+  status.finally(() => {
+    addNotification("Recipe trashed successfully.", "success");
+  });
+};
+
+const restoreRecipe = function () {
+  recipe.trashed = false;
+  formData.value.trashed = false;
+  const status = writeRecipe(formData.value);
+  status.catch((error) => {
+    addNotification("Error restoring recipe, please try again later.", "error");
+  });
+  status.finally(() => {
+    addNotification("Recipe restored successfully.", "success");
+  });
+};
+
 const formData = ref({
   author: "default",
   id: recipe.id ? recipe.id : null,
@@ -85,6 +128,8 @@ const formData = ref({
   instructions: recipe.instructions ? recipe.instructions : "",
   notes: recipe.notes ? recipe.notes : "",
 });
+
+
 
 /* Helper functions to generate placeholder text */
 function getRandomItemFromArray(array) {
