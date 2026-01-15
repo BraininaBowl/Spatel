@@ -80,10 +80,14 @@ body {
   font-size: 1rem;
   margin: 0 auto;
   max-width: 120ch;
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 0;
+  position: relative;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
 }
 
 main {
