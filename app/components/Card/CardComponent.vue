@@ -1,5 +1,9 @@
 <template>
-  <NuxtLink :to="`/${recipe.id}-${returnUri(recipe.title)}`" class="card" :title="recipe.description">
+  <NuxtLink
+    :to="`/${recipe.id}-${returnUri(recipe.title)}${recipe.trashed ? '/edit' : ''}`"
+    class="card"
+    :title="recipe.description"
+  >
     <h3>
       {{ recipe.title }}
     </h3>
@@ -18,7 +22,7 @@ import { returnUri } from "~/layouts/default.vue";
 </script>
 
 <style lang="css" scoped>
-.card {
+a.card {
   background-color: var(--col-area-bg);
   border: 1px solid var(--col-border);
   border-radius: 0.5rem;

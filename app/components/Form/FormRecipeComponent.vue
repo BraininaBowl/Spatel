@@ -1,13 +1,25 @@
 <template>
+  <div class="page_options" v-if="recipe.id">
+    <a @click="restoreRecipe()" v-if="recipe.trashed"
+      >Restore recipe</a
+    >
+    <a
+      @click="trashRecipe()"
+      v-if="recipe.trashed !== true"
+      >Trash recipe</a
+    >
+  </div>
+
   <form @submit.prevent="handleSubmit">
     <FormInputComponent
       v-model="formData.title"
       :formfieldData="{
+        typeField: 'text',
         label: 'Title',
         placeholder: formTitlePlaceholder,
         requiredField: true,
         id: useId(),
-        disabledField: formData.trashed
+        disabledField: formData.trashed,
       }"
     />
     <FormTextareaComponent
@@ -17,7 +29,7 @@
         placeholder: formDescriptionPlaceholder,
         requiredField: false,
         id: useId(),
-        disabledField: formData.trashed
+        disabledField: formData.trashed,
       }"
     />
     <FormTextareaComponent
@@ -28,7 +40,7 @@
         placeholder: formIngredientsPlaceholder,
         requiredField: true,
         id: useId(),
-        disabledField: formData.trashed
+        disabledField: formData.trashed,
       }"
     />
     <FormTextareaComponent
@@ -39,7 +51,7 @@
         placeholder: formInstructionsPlaceholder,
         requiredField: true,
         id: useId(),
-        disabledField: formData.trashed
+        disabledField: formData.trashed,
       }"
     />
     <FormTextareaComponent
@@ -49,25 +61,44 @@
         placeholder: formNotesPlaceholder,
         requiredField: false,
         id: useId(),
-        disabledField: formData.trashed
+        disabledField: formData.trashed,
+      }"
+    />
+    <FormInputComponent
+      v-model="formData.id"
+      :formfieldData="{
+        typeField: 'hidden',
+        label: 'id',
+        placeholder: '',
+        requiredField: true,
+        id: useId(),
+      }"
+    />
+    <FormInputComponent
+      v-model="formData.added"
+      :formfieldData="{
+        typeField: 'hidden',
+        label: 'added',
+        placeholder: '',
+        requiredField: true,
+        id: useId(),
+      }"
+    />
+    <FormInputComponent
+      v-model="formData.edited"
+      :formfieldData="{
+        typeField: 'hidden',
+        label: 'edited',
+        placeholder: '',
+        requiredField: true,
+        id: useId(),
       }"
     />
 
     <div class="button-row">
       <button type="submit" v-if="recipe.trashed !== true">Save recipe</button>
-      <a
-        class="button"
-        @click="restoreRecipe()"
-        v-if="recipe.id !== null && recipe.trashed"
-        >Restore recipe</a
-      >
-      <a
-        class="button"
-        @click="trashRecipe()"
-        v-if="recipe.trashed !== true && recipe.id !== null"
-        >Trash recipe</a
-      >
-      <NuxtLink to="./">Cancel</NuxtLink>
+      <NuxtLink to="./" v-if="recipe.trashed !== true">Back</NuxtLink>
+      <NuxtLink to="/trash" v-if="recipe.trashed === true">Back</NuxtLink>
     </div>
   </form>
 </template>
@@ -122,14 +153,14 @@ const restoreRecipe = function () {
 const formData = ref({
   author: "default",
   id: recipe.id ? recipe.id : null,
+  added: recipe.added ? recipe.added : new Date(),
+  edited: new Date(),
   title: recipe.title ? recipe.title : "",
   description: recipe.description ? recipe.description : "",
   ingredients: recipe.ingredients ? recipe.ingredients : "",
   instructions: recipe.instructions ? recipe.instructions : "",
   notes: recipe.notes ? recipe.notes : "",
 });
-
-
 
 /* Helper functions to generate placeholder text */
 function getRandomItemFromArray(array) {

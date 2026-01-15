@@ -1,5 +1,5 @@
 <template>
-  <div class="formfield">
+  <div :class="`formfield ${formfieldData.typeField}`">
     <label
       class="hidden"
       :for="formfieldData.id"
@@ -8,7 +8,7 @@
     >
     <label :for="formfieldData.id" v-else>{{ formfieldData.label }}</label>
     <input
-      type="text"
+      :type="formfieldData.typeField"
       :id="formfieldData.id"
       :placeholder="formfieldData.placeholder"
       v-model="model"

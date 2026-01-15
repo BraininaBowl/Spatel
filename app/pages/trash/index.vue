@@ -1,32 +1,10 @@
 <template>
   <main>
     <h1>Trashed recipes</h1>
-    <div class="loader" v-if="status == null">Loading...</div>
-    <div class="loader" v-else-if="recipes.length == 0">No recipes in trash.</div>
-    <section class="card_container" v-else>
-      <CardComponent
-        v-for="recipe in recipes"
-        :key="recipe.id"
-        :recipe="recipe"
-      />
-    </section>
+    <OverviewRecipesComponent pageType="trash" />
   </main>
 </template>
 
-<script setup>
-const { recipes, status, fetchTrashed } = useRecipes();
+<script setup></script>
 
-onMounted(() => {
-  fetchTrashed();
-});
-onUnmounted(() => {});
-</script>
-
-<style lang="css" scoped>
-  .card_container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-  }
-</style>
+<style lang="css" scoped></style>

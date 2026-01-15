@@ -3,9 +3,18 @@ export const useRecipes = () => {
   const recipe = useState("recipe", () => null);
   const status = useState("status", () => null);
 
-  async function fetchRecipes() {
+  async function fetchRecipes(sort) {
     const response = await $fetch("/api/recipes");
-    recipes.value = response.data.recipes;
+    let data = response.data.recipes;
+    if (sort == "oldest") {
+      data.sort((a,b) => new Date(a.added) - new Date(b.added))  
+    }
+    else if (sort == "edited") {
+      data.sort((a,b) => new Date(b.edited) - new Date(a.edited))  
+    } else {
+      data.sort((a,b) => new Date(b.added) - new Date(a.added))
+    }
+    recipes.value = data;
     status.value = response.status;
   }
 

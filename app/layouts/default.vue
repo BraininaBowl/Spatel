@@ -3,6 +3,7 @@
     <div id="notifications"></div>
     <NavigationComponent :nav-items="navItems" />
     <NuxtPage />
+    <NavigationFooterComponent />
   </div>
 </template>
 
@@ -17,7 +18,7 @@ function addNotification(message, type = "info") {
     notificationsArea.appendChild(notification);
     setTimeout(() => {
       notificationsArea.removeChild(notification);
-    }, 3000);
+    }, 5000);
   }
 }
 
@@ -29,6 +30,7 @@ export { addNotification, returnUri };
 </script>
 
 <script setup>
+
 const navItems = [
   {
     to: "/",
@@ -65,6 +67,8 @@ body {
   color: var(--col-text);
   font-size: 14px;
   line-height: 1.4rem;
+  margin: 0;
+  padding: 0;
 }
 
 * {
@@ -74,8 +78,16 @@ body {
 .default_template {
   font-family: "PT Serif", serif;
   font-size: 1rem;
-  margin: 1rem auto;
-  max-width: 800px;
+  margin: 0 auto;
+  max-width: 120ch;
+  padding: 1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 2;
 }
 
 .hidden {
@@ -90,12 +102,43 @@ body {
   border: 0;
 }
 
+.page_options {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--col-border);
+  border-bottom: 1px solid var(--col-border);
+  margin: 0 0 1.5rem 0;
+
+  .item {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  select,
+  input {
+    font-family: "PT Serif", serif;
+    font-size: 0.8rem;
+    padding: 0 0.5rem 0 0;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+  }
+}
+
+h1 {
+  margin: 3rem 0 1.5rem;
+}
+
 /* Links */
 a {
   color: var(--col-link);
   text-decoration: none;
   transition: color 0.2s;
   display: inline-block;
+  cursor: pointer;
 }
 a:not(.card)::after {
   content: "";
@@ -170,6 +213,7 @@ button::before,
   border: 1px solid var(--col-border);
   background-color: var(--col-area-bg);
 }
+
 .notification::before {
   content: "";
   display: inline-block;
@@ -252,5 +296,33 @@ textarea:focus-visible {
   display: flex;
   flex-direction: column;
   gap: 0.125rem;
+}
+
+@media print {
+  footer,
+  nav,
+  .page_options {
+    display: none !important;
+  }
+
+  * {
+    background-color: rgba(255, 255, 255, 0);
+  }
+
+  h1 {
+    font-size: 24px !important;
+  }
+
+  h4 {
+    font-size: 11px !important;
+  }
+
+  p, a, li {
+    font-size: 12px !important;
+  }
+
+  ul, ol {
+    gap: 3px !important;
+  }
 }
 </style>

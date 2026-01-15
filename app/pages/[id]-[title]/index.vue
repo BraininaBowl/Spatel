@@ -1,31 +1,35 @@
 <template>
-  <div class="loader" v-if="!recipe">Loading...</div>
-  <article class="recipe" v-else>
-    <header>
-      <h1 v-if="recipe.title">{{ recipe.title }}</h1>
-      <NuxtLink :to="`/${recipe.id}-${returnUri(recipe.title)}/edit`"
-        >Edit</NuxtLink
-      >
-    </header>
-    <main>
-      <section v-if="recipe.description">
-        <h4>Description</h4>
-        <p v-html="stringToBreak(recipe.description)"></p>
-      </section>
-      <section v-if="recipe.ingredients">
-        <h4>Ingredients</h4>
-        <ul v-html="stringToList(recipe.ingredients)"></ul>
-      </section>
-      <section v-if="recipe.instructions">
-        <h4>Instructions</h4>
-        <ol v-html="stringToList(recipe.instructions)"></ol>
-      </section>
-      <section v-if="recipe.notes">
-        <h4>Notes</h4>
-        <p v-html="stringToBreak(recipe.notes)"></p>
-      </section>
-    </main>
-  </article>
+  <main>
+    <div class="loader" v-if="!recipe">Loading...</div>
+    <article class="recipe" v-else>
+      <header>
+        <h1 v-if="recipe.title">{{ recipe.title }}</h1>
+        <div class="page_options">
+          <NuxtLink :to="`/${recipe.id}-${returnUri(recipe.title)}/edit`"
+            >Edit</NuxtLink
+          >
+        </div>
+      </header>
+      <main>
+        <section v-if="recipe.description">
+          <h4>Description</h4>
+          <p v-html="stringToBreak(recipe.description)"></p>
+        </section>
+        <section v-if="recipe.ingredients">
+          <h4>Ingredients</h4>
+          <ul v-html="stringToList(recipe.ingredients)"></ul>
+        </section>
+        <section v-if="recipe.instructions">
+          <h4>Instructions</h4>
+          <ol v-html="stringToList(recipe.instructions)"></ol>
+        </section>
+        <section v-if="recipe.notes">
+          <h4>Notes</h4>
+          <p v-html="stringToBreak(recipe.notes)"></p>
+        </section>
+      </main>
+    </article>
+  </main>
 </template>
 
 <script setup>
@@ -47,7 +51,11 @@ onMounted(() => {
 });
 </script>
 <style lang="css" scoped>
-.recipe,
+.recipe {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+}
 .recipe main {
   display: flex;
   flex-direction: column;
