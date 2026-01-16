@@ -1,15 +1,11 @@
 export const useAccounts = () => {
-  const user = useState("user", () => null);
-
-  async function loginUser(dataObject) {
-    const response = await $fetch("/api/login/login", {
+  async function checkLogin(dataObject) {
+    await $fetch("/api/login", {
       method: "POST",
       body: dataObject,
     });
-    return response;
   }
-
   return {
-    loginUser,
+    checkLogin,
   };
 };

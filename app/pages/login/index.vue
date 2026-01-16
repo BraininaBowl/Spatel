@@ -14,36 +14,24 @@
 </template>
 
 <script setup>
+import { addNotification } from "~/layouts/default.vue";
 const { loggedIn, user, fetch: refreshSession } = useUserSession();
-const { loginUser} = useAccounts();
+const { checkLogin } = useAccounts();
 const credentials = reactive({
   email: "",
   password: "",
 });
 
 async function login() {
-  const status = loginUser(credentials.value);
+  const status = checkLogin(credentials);
   status.catch((error) => {
     addNotification("Incorrect username and/or password", "error");
   });
   status.finally(() => {
-    addNotification("Login succesful!", "success");
     refreshSession();
+    addNotification("Login succesful!", "success");
   });
 
-
-  try {
-    await $fetch("/api/login", {
-      method: "POST",
-      body: credentials,
-    });
-
-    // Refresh the session on client-side and redirect to the home page
-    await refreshSession();
-    await navigateTo("/");
-  } catch {
-    alert("Bad credentials");
-  }
 }
 </script>
 

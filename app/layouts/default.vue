@@ -178,7 +178,9 @@ button,
   background-color: var(--col-link);
   color: var(--col-button-text);
   font-size: 1rem;
-  transition: border-radius 0.35s ease-out, box-shadow 0.35s ease-out,
+  transition:
+    border-radius 0.35s ease-out,
+    box-shadow 0.35s ease-out,
     background-color 0.2s;
 }
 button:hover,
@@ -186,7 +188,8 @@ button:hover,
   background-color: var(--col-link-hover);
   color: var(--col-button-text);
   border-radius: 1rem;
-  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.2),
+  box-shadow:
+    0 0.3rem 0.6rem rgba(0, 0, 0, 0.2),
     0 0.1rem 0.1rem rgba(0, 0, 0, 0.1);
 }
 
