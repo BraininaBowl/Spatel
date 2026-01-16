@@ -5,9 +5,12 @@
       <header>
         <h1 v-if="recipe.title">{{ recipe.title }}</h1>
         <div class="page_options">
-          <NuxtLink :to="`/${recipe.id}-${returnUri(recipe.title)}/edit`"
-            >Edit</NuxtLink
-          >
+          <div class="submenu left">
+            <NuxtLink :to="`/${recipe.id}-${returnUri(recipe.title)}/edit`"
+              >Edit</NuxtLink
+            >
+          </div>
+          <NavigationOptionsRightComponent />
         </div>
       </header>
       <main>

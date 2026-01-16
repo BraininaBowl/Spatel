@@ -9,7 +9,13 @@ export default defineNuxtConfig({
     },
   },
 
-  modules: ["@nuxt/fonts", "@nuxt/image", "@nuxt/a11y", "@nuxt/eslint"],
+  modules: [
+    "@nuxt/fonts",
+    "@nuxt/image",
+    "@nuxt/a11y",
+    "@nuxt/eslint",
+    "nuxt-auth-utils",
+  ],
 
   nitro: {
     storage: {

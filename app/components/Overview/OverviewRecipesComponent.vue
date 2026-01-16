@@ -1,13 +1,16 @@
 <template>
   <div class="page_options">
-    <div class="item">
-      <label for="sorting">Sort:</label>
-      <select name="sorting" id="sorting">
-        <option value="newest">Newest first</option>
-        <option value="oldest">Oldest first</option>
-        <option value="edited">Recently updated</option>
-      </select>
+    <div class="submenu left">
+      <div class="item">
+        <label for="sorting">Sort:</label>
+        <select name="sorting" id="sorting">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+          <option value="edited">Recently updated</option>
+        </select>
+      </div>
     </div>
+    <NavigationOptionsRightComponent />
   </div>
   <div class="loader" v-if="status == null">Loading...</div>
   <div

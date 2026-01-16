@@ -30,6 +30,7 @@ export { addNotification, returnUri };
 </script>
 
 <script setup>
+const { loggedIn, session, user, clear, fetch } = useUserSession();
 
 const navItems = [
   {
@@ -109,17 +110,24 @@ main {
 .page_options {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 2rem;
   padding: 0.5rem 0;
   border-top: 1px solid var(--col-border);
   border-bottom: 1px solid var(--col-border);
   margin: 0 0 1.5rem 0;
 
-  .item {
+  .submenu {
     display: flex;
     flex-direction: row;
-    gap: 0.5rem;
+    justify-content: flex-start;
+    gap: 2rem;
+
+    .item {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+    }
   }
 
   select,
@@ -170,9 +178,7 @@ button,
   background-color: var(--col-link);
   color: var(--col-button-text);
   font-size: 1rem;
-  transition:
-    border-radius 0.35s ease-out,
-    box-shadow 0.35s ease-out,
+  transition: border-radius 0.35s ease-out, box-shadow 0.35s ease-out,
     background-color 0.2s;
 }
 button:hover,
@@ -180,8 +186,7 @@ button:hover,
   background-color: var(--col-link-hover);
   color: var(--col-button-text);
   border-radius: 1rem;
-  box-shadow:
-    0 0.3rem 0.6rem rgba(0, 0, 0, 0.2),
+  box-shadow: 0 0.3rem 0.6rem rgba(0, 0, 0, 0.2),
     0 0.1rem 0.1rem rgba(0, 0, 0, 0.1);
 }
 
@@ -321,11 +326,14 @@ textarea:focus-visible {
     font-size: 11px !important;
   }
 
-  p, a, li {
+  p,
+  a,
+  li {
     font-size: 12px !important;
   }
 
-  ul, ol {
+  ul,
+  ol {
     gap: 3px !important;
   }
 }
