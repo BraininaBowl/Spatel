@@ -116,7 +116,9 @@ main {
   border-top: 1px solid var(--col-border);
   border-bottom: 1px solid var(--col-border);
   margin: 0 0 1.5rem 0;
-
+  p {
+    margin: 0;
+  }
   .submenu {
     display: flex;
     flex-direction: row;

@@ -5,7 +5,15 @@ export const useAccounts = () => {
       body: dataObject,
     });
   }
+
+  async function createUser(dataObject) {
+    await $fetch("/api/signup", {
+      method: "POST",
+      body: dataObject,
+    });
+  }
   return {
     checkLogin,
+    createUser,
   };
 };

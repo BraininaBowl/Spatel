@@ -23,6 +23,10 @@ export default defineNuxtConfig({
         driver: "fs",
         base: "server/data/recipes",
       },
+      userStore: {
+        driver: "fs",
+        base: "server/data/users",
+      },
     },
   },
 });
