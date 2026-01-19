@@ -1,7 +1,7 @@
 <template>
   <div class="default_template">
     <div id="notifications"></div>
-    <NavigationComponent :nav-items="navItems" />
+    <NavigationComponent />
     <NuxtPage />
     <NavigationFooterComponent />
   </div>
@@ -32,20 +32,6 @@ export { addNotification, returnUri };
 <script setup>
 const { loggedIn, session, user, clear, fetch } = useUserSession();
 
-const navItems = [
-  {
-    to: "/",
-    label: "Recipes",
-  },
-  {
-    to: "/New",
-    label: "New recipe",
-  },
-  {
-    to: "/Trash",
-    label: "Trash",
-  },
-];
 </script>
 
 <style lang="css">

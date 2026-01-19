@@ -6,7 +6,9 @@
         <h1 v-if="recipe.title">{{ recipe.title }}</h1>
         <div class="page_options">
           <div class="submenu left">
-            <NuxtLink :to="`/${recipe.id}-${returnUri(recipe.title)}/edit`"
+            <NuxtLink
+              :to="`/${recipe.id}-${returnUri(recipe.title)}/edit`"
+              v-if="loggedIn"
               >Edit</NuxtLink
             >
           </div>

@@ -1,4 +1,7 @@
 export default defineEventHandler(async (event) => {
+  // make sure user is logged in
+  const { user } = await requireUserSession(event);
+
   async function getNewId() {
     const keys = await storage.keys();
     const promises = keys.map((key) => storage.getItem(key));

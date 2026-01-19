@@ -47,11 +47,11 @@ const pageType = props.pageType;
 
 const { recipes, status, fetchRecipes, fetchTrashed } = useRecipes();
 
-onMounted(() => {
+onMounted(async () => {
   if (pageType == "main") {
     fetchRecipes();
   } else if (pageType == "trash") {
-    fetchTrashed();
+    const status = fetchTrashed();
   }
   const sorting = document.querySelector("#sorting");
   sorting.addEventListener("change", function () {
