@@ -1,4 +1,4 @@
-![The Spatel logo](/images/logo_spatel.svg)
+![The Spatel logo](app/images/logo_spatel.svg)
 
 # Spatel
 
