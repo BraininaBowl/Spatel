@@ -38,6 +38,7 @@
 </template>
 
 <script setup>
+const { loggedIn } = useUserSession();
 import { returnUri } from "~/layouts/default.vue";
 const route = useRoute();
 const recipeId = route.params.id;

@@ -1,7 +1,9 @@
+![The Spatel logo](/images/logo_spatel.svg)
+
 # Spatel
 
-Based on Nuxt Minimal Starter
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A simple recipe database written in Vue/Nuxt.
+
 
 ## Setup
 
