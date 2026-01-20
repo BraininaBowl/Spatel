@@ -31,7 +31,6 @@ export { addNotification, returnUri };
 
 <script setup>
 const { loggedIn, session, user, clear, fetch } = useUserSession();
-
 </script>
 
 <style lang="css">
@@ -305,6 +304,10 @@ textarea:focus-visible {
     display: none !important;
   }
 
+  .default_template {
+    padding: 0 1rem 0 4rem;
+  }
+
   * {
     background-color: rgba(255, 255, 255, 0);
   }
@@ -314,13 +317,13 @@ textarea:focus-visible {
   }
 
   h4 {
-    font-size: 11px !important;
+    font-size: 12px !important;
   }
 
   p,
   a,
   li {
-    font-size: 12px !important;
+    font-size: 14px !important;
   }
 
   ul,

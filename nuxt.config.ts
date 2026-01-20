@@ -27,6 +27,14 @@ export default defineNuxtConfig({
         driver: "fs",
         base: "server/data/users",
       },
+      userWhitelistStore: {
+        driver: "fs",
+        base: "server/data/user_whitelist",
+      },
+      userBlacklistStore: {
+        driver: "fs",
+        base: "server/data/user_blacklist",
+      },
     },
   },
 });
