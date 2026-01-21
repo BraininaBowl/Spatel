@@ -1,16 +1,18 @@
 export const useAccounts = () => {
   async function checkLogin(dataObject) {
-    await $fetch("/api/login", {
+    let response = await $fetch("/api/login", {
       method: "POST",
       body: dataObject,
     });
+    return response
   }
 
   async function createUser(dataObject) {
-    await $fetch("/api/signup", {
+    let response = await $fetch("/api/signup", {
       method: "POST",
       body: dataObject,
-    });
+    })
+    return response
   }
   return {
     checkLogin,

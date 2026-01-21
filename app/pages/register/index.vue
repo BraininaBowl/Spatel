@@ -11,6 +11,7 @@
           requiredField: true,
           id: useId(),
           disabledField: false,
+          autocomplete: 'nickname',
         }"
       />
       <FormInputComponent
@@ -22,6 +23,7 @@
           requiredField: true,
           id: useId(),
           disabledField: false,
+          autocomplete: 'email',
         }"
       />
       <FormInputComponent
@@ -33,6 +35,7 @@
           requiredField: true,
           id: useId(),
           disabledField: false,
+          autocomplete: 'new-password',
         }"
       />
       <button type="submit">Sign up</button>
@@ -51,14 +54,8 @@ const credentials = reactive({
 });
 
 async function signup() {
-  const status = createUser(credentials);
-  status.catch((error) => {
-    addNotification("Error: " + error, "error");
-  });
-  status.finally(() => {
-    refreshSession();
-    addNotification("Signup succesful!", "success");
-  });
+  const response = await createUser(credentials)
+  addNotification(response.message, response.type);
 }
 </script>
 

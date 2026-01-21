@@ -4,9 +4,9 @@
     class="card"
     :title="recipe.description"
   >
-    <h3>
+    <h2>
       {{ recipe.title }}
-    </h3>
+    </h2>
     <p>{{ recipe.description }}</p>
   </NuxtLink>
 </template>
@@ -32,16 +32,16 @@ a.card {
   gap: 0rem;
   align-items: flex-start;
   transition: all 0.2s ease-out;
-  h3,
+  h2,
   p {
     padding: 1rem 1.5rem;
     color: var(--col-text);
     width: 100%;
     margin: 0;
   }
-  h3 {
+  h2 {
     flex-grow: 2;
-
+    font-size: 1.17em;
     align-content: center;
   }
   p {

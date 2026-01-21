@@ -29,7 +29,6 @@ export const useRecipes = () => {
     try {
       response = await $fetch(`/api/trashed`);
     } catch (error) {
-      console.log(error);
       recipes.value = [];
     } finally {
       recipes.value = response.data.recipes;

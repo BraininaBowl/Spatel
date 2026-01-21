@@ -2,12 +2,31 @@
   <main>
     <h1>Login</h1>
     <form @submit.prevent="login">
-      <input v-model="credentials.email" type="email" placeholder="Email" />
-      <input
-        v-model="credentials.password"
-        type="password"
-        placeholder="Password"
+      <FormInputComponent
+        v-model="credentials.email"
+        :formfieldData="{
+          typeField: 'email',
+          label: 'Email',
+          placeholder: 'email@address.com',
+          requiredField: true,
+          id: useId(),
+          disabledField: false,
+          autocomplete: 'email',
+        }"
       />
+      <FormInputComponent
+        v-model="credentials.password"
+        :formfieldData="{
+          typeField: 'password',
+          label: 'Password',
+          placeholder: '******************',
+          requiredField: true,
+          id: useId(),
+          disabledField: false,
+          autocomplete: 'current-password',
+        }"
+      />
+
       <button type="submit">Login</button>
     </form>
   </main>
@@ -23,15 +42,9 @@ const credentials = reactive({
 });
 
 async function login() {
-  const status = checkLogin(credentials);
-  status.catch((error) => {
-    addNotification("Incorrect username and/or password", "error");
-  });
-  status.finally(() => {
-    refreshSession();
-    addNotification("Login succesful!", "success");
-  });
-
+  const response = await checkLogin(credentials);
+  refreshSession();
+  addNotification(response.message, response.type);
 }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <div>
     <div class="loader" v-if="!recipe">Loading...</div>
     <article class="recipe" v-else>
       <header>
@@ -17,24 +17,24 @@
       </header>
       <main>
         <section v-if="recipe.description">
-          <h4>Description</h4>
-          <p v-html="stringToBreak(recipe.description)"></p>
+          <p class="label">Description</p>
+          <p class="area" v-html="stringToBreak(recipe.description)"></p>
         </section>
         <section v-if="recipe.ingredients">
-          <h4>Ingredients</h4>
+          <p class="label">Ingredients</p>
           <ul v-html="stringToList(recipe.ingredients)"></ul>
         </section>
         <section v-if="recipe.instructions">
-          <h4>Instructions</h4>
+          <p class="label">Instructions</p>
           <ol v-html="stringToList(recipe.instructions)"></ol>
         </section>
         <section v-if="recipe.notes">
-          <h4>Notes</h4>
-          <p v-html="stringToBreak(recipe.notes)"></p>
+          <p class="label">Notes</p>
+          <p class="area" v-html="stringToBreak(recipe.notes)"></p>
         </section>
       </main>
     </article>
-  </main>
+  </div>
 </template>
 
 <script setup>
@@ -72,7 +72,7 @@ onMounted(() => {
     flex-direction: column;
     gap: 0rem;
 
-    p,
+    p.area,
     ol,
     ul {
       border: 1px solid var(--col-border);

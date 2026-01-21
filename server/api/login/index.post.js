@@ -9,16 +9,25 @@ export default defineEventHandler(async (event) => {
     return obj.email === body.email;
   })[0];
 
-  if (await verifyPassword(user.password, body.password)) {
-    console.log("User checks out!");
-    const status = await setUserSession(event, {
-      user: {
-        name: user.username,
-        email: user.email,
-      },
-    });
-    return { succes: true, message: "Login successful" };
+  let response = {};
+
+  if (user === undefined) {
+    response.message = "Invalid credentials.";
+    response.type = "error";
   } else {
-    return { success: false, message: "Invalid credentials" };
+    if (await verifyPassword(user.password, body.password)) {
+      await setUserSession(event, {
+        user: {
+          name: user.username,
+          email: user.email,
+        },
+      });
+      response.message = "Login successful.";
+      response.type = "success";
+    } else {
+      response.message = "Invalid credentials.";
+      response.type = "error";
+    }
   }
+  return response;
 });

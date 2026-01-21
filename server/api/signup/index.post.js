@@ -53,6 +53,7 @@ export default defineEventHandler(async (event) => {
     return foundUser;
   }
 
+  let response = {};
   const body = await readBody(event);
   const storage = useStorage("userStore");
   const whitelist = useStorage("userWhitelistStore");
@@ -63,17 +64,22 @@ export default defineEventHandler(async (event) => {
   const duplicateEmail = await checkEmail(body.email);
   const duplicateUsername = await checkUsername(body.username);
   if (whitelisted === false || blacklisted === true) {
-    return "Email address not allowed.";
+    response.message = "Email address not allowed."
+    response.type = "error"
   } else if (duplicateEmail === true) {
-    return "Duplicate email";
+    response.message = "Duplicate email."
+    response.type = "error"
   } else if (duplicateUsername === true) {
-    return "Duplicate username";
+    response.message = "Duplicate username."
+    response.type = "error"
   } else {
     if (!body.id) {
       body.id = await getNewId();
     }
     body.password = await hashPassword(body.password);
     await storage.setItem(body.id + ".json", body);
-    return "Success";
+    response.message = "Account created."
+    response.type = "success"
   }
+  return response;
 });

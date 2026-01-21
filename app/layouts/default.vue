@@ -1,6 +1,6 @@
 <template>
   <div class="default_template">
-    <div id="notifications"></div>
+    <div id="notifications" role="alert"></div>
     <NavigationComponent />
     <NuxtPage />
     <NavigationFooterComponent />
@@ -18,7 +18,7 @@ function addNotification(message, type = "info") {
     notificationsArea.appendChild(notification);
     setTimeout(() => {
       notificationsArea.removeChild(notification);
-    }, 5000);
+    }, 7000);
   }
 }
 
@@ -35,10 +35,10 @@ const { loggedIn, session, user, clear, fetch } = useUserSession();
 
 <style lang="css">
 :root {
-  --col-bg: #efefef;
+  --col-bg: #f7f7f7;
   --col-area-bg: #ffffff;
   --col-text: #333344;
-  --col-link: #26547c;
+  --col-link: #224c70;
   --col-link-hover: #326796;
   --col-accent: #2faca7;
   --col-button-text: #ffffff;
@@ -253,7 +253,7 @@ fieldset {
 
 label,
 legend,
-h4 {
+.label {
   font-weight: bold;
   font-size: 0.9rem;
   margin: 0;
@@ -296,6 +296,26 @@ textarea:focus-visible {
   flex-direction: column;
   gap: 0.125rem;
 }
+
+/* Transition */
+.page-enter-active {
+  transition: all 0.1s ease-out;
+}
+
+.page-leave-active {
+  transition: all 0.1s ease-in;
+}
+.page-enter-from {
+  opacity: 0.25;
+  transform: translateX(5%);
+}
+
+.page-leave-to {
+  opacity: 0.25;
+  transform: translateX(-5%);
+}
+
+/* Print */
 
 @media print {
   footer,
