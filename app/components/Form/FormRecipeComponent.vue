@@ -1,13 +1,10 @@
 <template>
   <div class="page_options" v-if="recipe.id">
-    <a @click="restoreRecipe()" v-if="recipe.trashed"
-      >Restore recipe</a
-    >
-    <a
-      @click="trashRecipe()"
-      v-if="recipe.trashed !== true"
-      >Trash recipe</a
-    >
+    <div class="submenu left">
+      <a @click="restoreRecipe()" v-if="recipe.trashed">Restore recipe</a>
+      <a @click="trashRecipe()" v-if="recipe.trashed !== true">Trash recipe</a>
+    </div>
+    <NavigationOptionsRightComponent />
   </div>
 
   <form @submit.prevent="handleSubmit">
@@ -105,6 +102,7 @@
 
 <script setup>
 import { addNotification } from "~/layouts/default.vue";
+import NavigationOptionsRightComponent from "../Navigation/NavigationOptionsRightComponent.vue";
 
 const props = defineProps({
   recipe: {

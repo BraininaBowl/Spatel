@@ -1,7 +1,7 @@
 <template>
   <div class="default_template">
-    <div id="notifications"></div>
-    <NavigationComponent :nav-items="navItems" />
+    <div id="notifications" role="alert"></div>
+    <NavigationComponent />
     <NuxtPage />
     <NavigationFooterComponent />
   </div>
@@ -18,7 +18,7 @@ function addNotification(message, type = "info") {
     notificationsArea.appendChild(notification);
     setTimeout(() => {
       notificationsArea.removeChild(notification);
-    }, 5000);
+    }, 7000);
   }
 }
 
@@ -30,29 +30,15 @@ export { addNotification, returnUri };
 </script>
 
 <script setup>
-
-const navItems = [
-  {
-    to: "/",
-    label: "Recipes",
-  },
-  {
-    to: "/New",
-    label: "New recipe",
-  },
-  {
-    to: "/Trash",
-    label: "Trash",
-  },
-];
+const { loggedIn, session, user, clear, fetch } = useUserSession();
 </script>
 
 <style lang="css">
 :root {
-  --col-bg: #efefef;
+  --col-bg: #f7f7f7;
   --col-area-bg: #ffffff;
   --col-text: #333344;
-  --col-link: #26547c;
+  --col-link: #224c70;
   --col-link-hover: #326796;
   --col-accent: #2faca7;
   --col-button-text: #ffffff;
@@ -109,17 +95,26 @@ main {
 .page_options {
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 2rem;
   padding: 0.5rem 0;
   border-top: 1px solid var(--col-border);
   border-bottom: 1px solid var(--col-border);
   margin: 0 0 1.5rem 0;
-
-  .item {
+  p {
+    margin: 0;
+  }
+  .submenu {
     display: flex;
     flex-direction: row;
-    gap: 0.5rem;
+    justify-content: flex-start;
+    gap: 2rem;
+
+    .item {
+      display: flex;
+      flex-direction: row;
+      gap: 0.5rem;
+    }
   }
 
   select,
@@ -258,7 +253,7 @@ fieldset {
 
 label,
 legend,
-h4 {
+.label {
   font-weight: bold;
   font-size: 0.9rem;
   margin: 0;
@@ -302,11 +297,35 @@ textarea:focus-visible {
   gap: 0.125rem;
 }
 
+/* Transition */
+.page-enter-active {
+  transition: all 0.1s ease-out;
+}
+
+.page-leave-active {
+  transition: all 0.1s ease-in;
+}
+.page-enter-from {
+  opacity: 0.25;
+  transform: translateX(5%);
+}
+
+.page-leave-to {
+  opacity: 0.25;
+  transform: translateX(-5%);
+}
+
+/* Print */
+
 @media print {
   footer,
   nav,
   .page_options {
     display: none !important;
+  }
+
+  .default_template {
+    padding: 0 1rem 0 4rem;
   }
 
   * {
@@ -318,14 +337,17 @@ textarea:focus-visible {
   }
 
   h4 {
-    font-size: 11px !important;
-  }
-
-  p, a, li {
     font-size: 12px !important;
   }
 
-  ul, ol {
+  p,
+  a,
+  li {
+    font-size: 14px !important;
+  }
+
+  ul,
+  ol {
     gap: 3px !important;
   }
 }

@@ -1,13 +1,16 @@
 <template>
   <div class="page_options">
-    <div class="item">
-      <label for="sorting">Sort:</label>
-      <select name="sorting" id="sorting">
-        <option value="newest">Newest first</option>
-        <option value="oldest">Oldest first</option>
-        <option value="edited">Recently updated</option>
-      </select>
+    <div class="submenu left">
+      <div class="item">
+        <label for="sorting">Sort:</label>
+        <select name="sorting" id="sorting">
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+          <option value="edited">Recently updated</option>
+        </select>
+      </div>
     </div>
+    <NavigationOptionsRightComponent />
   </div>
   <div class="loader" v-if="status == null">Loading...</div>
   <div
@@ -44,11 +47,11 @@ const pageType = props.pageType;
 
 const { recipes, status, fetchRecipes, fetchTrashed } = useRecipes();
 
-onMounted(() => {
+onMounted(async () => {
   if (pageType == "main") {
     fetchRecipes();
   } else if (pageType == "trash") {
-    fetchTrashed();
+    const status = fetchTrashed();
   }
   const sorting = document.querySelector("#sorting");
   sorting.addEventListener("change", function () {

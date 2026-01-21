@@ -14,6 +14,7 @@
       v-model="model"
       :required="formfieldData.requiredField"
       :disabled="formfieldData.disabledField"
+      :autocomplete="formfieldData.autocomplete"
     />
   </div>
 </template>
