@@ -27,6 +27,10 @@ logs
 !.env.example
 bun.lock
 server/data/recipes/*
+!server/data/recipes
 server/data/users/*
+!server/data/users
 server/data/user_whitelist/*
+!server/data/user_whitelist
 server/data/user_blacklist/*
+!server/data/user_blacklist
