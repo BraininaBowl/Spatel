@@ -20,6 +20,7 @@ export default defineEventHandler(async (event) => {
         user: {
           name: user.username,
           email: user.email,
+          id: user.id,
         },
       });
       response.message = "Login successful.";

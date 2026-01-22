@@ -13,9 +13,11 @@
     <NavigationOptionsRightComponent />
   </div>
   <div class="loader" v-if="status == null">Loading...</div>
-  <div
-    class="empty_state"
-    v-else-if="recipes.length == 0 && pageType == 'main'"
+  <div class="empty_state" v-else-if="recipes.length == 0 && pageType != 'trash' && !loggedIn"
+  >
+    No recipes found. <a href="/login">Login</a> or <a href="/register">Register</a> to add one.
+  </div>
+  <div class="empty_state" v-else-if="recipes.length == 0 && pageType == 'main'"
   >
     No recipes found. <a href="/new">Create one</a>
   </div>
@@ -44,18 +46,23 @@ const props = defineProps({
   },
 });
 const pageType = props.pageType;
-
-const { recipes, status, fetchRecipes, fetchTrashed } = useRecipes();
+const { loggedIn, user } = useUserSession();
+const { recipes, status, fetchRecipes, fetchTrashed, fetchMyRecipes } = useRecipes();
 
 onMounted(async () => {
-  if (pageType == "main") {
-    fetchRecipes();
-  } else if (pageType == "trash") {
-    const status = fetchTrashed();
+  function getRecipes(sort) {
+    if (pageType == "main") {
+      fetchRecipes(sort);
+    } else if (pageType == "mine") {
+      fetchMyRecipes(sort)
+    } else if (pageType == "trash") {
+      fetchTrashed(sort);
+    }
   }
+  getRecipes()
   const sorting = document.querySelector("#sorting");
   sorting.addEventListener("change", function () {
-    fetchRecipes(sorting.value);
+    getRecipes(sorting.value);
   });
 });
 onUnmounted(() => {});

@@ -4,9 +4,9 @@
       class="hidden"
       :for="formfieldData.id"
       v-if="formfieldData.labelHidden === true"
-      >{{ formfieldData.label }}</label
+      >{{ formfieldData.label }} <span class="required" v-if="formfieldData.requiredField">*</span></label
     >
-    <label :for="formfieldData.id" v-else>{{ formfieldData.label }}</label>
+    <label :for="formfieldData.id" v-else>{{ formfieldData.label }} <span class="required" v-if="formfieldData.requiredField">*</span></label>
     <input
       :type="formfieldData.typeField"
       :id="formfieldData.id"

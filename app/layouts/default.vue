@@ -131,6 +131,11 @@ h1 {
   margin: 3rem 0 1.5rem;
 }
 
+h2 {
+  color: var(--col-text);
+  font-size: 1.17em;
+}
+
 /* Links */
 a {
   color: var(--col-link);
@@ -257,6 +262,11 @@ legend,
   font-weight: bold;
   font-size: 0.9rem;
   margin: 0;
+
+  .required {
+    opacity: 0.85;
+    font-weight: 300;
+  }
 }
 
 form .help-text {

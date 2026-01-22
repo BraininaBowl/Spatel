@@ -2,22 +2,24 @@
   <main class="index" v-if="loggedIn">
     <h1>Edit recipe</h1>
     <div class="loading" v-if="!recipe">Loading...</div>
-    <FormRecipeComponent :recipe="recipe" v-else />
+    <FormRecipeComponent :recipe="recipe" v-else-if="user.id === recipe.author" />
+    <CardNotAllowedComponent v-else />
   </main>
-  <main v-else>
-    <h1>You shouldn't be here.</h1>
-    <p><NuxtLink to="/">Return home</NuxtLink></p>
-  </main>
+  <div v-else>
+    <CardNotAllowedComponent />
+  </div>
 </template>
 
 <script setup>
+import CardNotAllowedComponent from '~/components/Card/CardNotAllowedComponent.vue';
+
 const route = useRoute();
 const recipeId = route.params.id;
 const { recipe, fetchRecipe, fetchRecipes } = useRecipes();
-const { loggedIn } = useUserSession();
-
+const { loggedIn, user } = useUserSession();
+await fetchRecipe(recipeId);
+console.log ("user: ", user )
 onMounted(() => {
-  fetchRecipe(recipeId);
 });
 </script>
 

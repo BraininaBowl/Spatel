@@ -1,11 +1,8 @@
 <template>
-  <main v-if="loggedIn">
+  <main >
     <h1>Trashed recipes</h1>
-    <OverviewRecipesComponent pageType="trash" />
-  </main>
-  <main v-else>
-    <h1>You shouldn't be here.</h1>
-    <p><NuxtLink to="/">Return home</NuxtLink></p>
+    <OverviewRecipesComponent pageType="trash" v-if="loggedIn" />
+    <CardNotAllowedComponent v-else />
   </main>
 </template>
 

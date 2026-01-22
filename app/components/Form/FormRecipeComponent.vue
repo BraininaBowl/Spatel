@@ -1,8 +1,8 @@
 <template>
-  <div class="page_options" v-if="recipe.id">
+  <div class="page_options" v-if="recipe.id !== unset">
     <div class="submenu left">
       <a @click="restoreRecipe()" v-if="recipe.trashed">Restore recipe</a>
-      <a @click="trashRecipe()" v-if="recipe.trashed !== true">Trash recipe</a>
+      <a @click="trashRecipe()" v-else>Trash recipe</a>
     </div>
     <NavigationOptionsRightComponent />
   </div>
@@ -124,7 +124,7 @@ const handleSubmit = function () {
   });
 };
 
-const trashRecipe = function () {
+const trashRecipe = async function () {
   recipe.trashed = true;
   formData.value.trashed = true;
   const status = writeRecipe(formData.value);
@@ -134,9 +134,10 @@ const trashRecipe = function () {
   status.finally(() => {
     addNotification("Recipe trashed successfully.", "success");
   });
+  await refreshNuxtData()
 };
 
-const restoreRecipe = function () {
+const restoreRecipe = async function () {
   recipe.trashed = false;
   formData.value.trashed = false;
   const status = writeRecipe(formData.value);
@@ -146,6 +147,7 @@ const restoreRecipe = function () {
   status.finally(() => {
     addNotification("Recipe restored successfully.", "success");
   });
+  await refreshNuxtData()
 };
 
 const formData = ref({
@@ -158,6 +160,7 @@ const formData = ref({
   ingredients: recipe.ingredients ? recipe.ingredients : "",
   instructions: recipe.instructions ? recipe.instructions : "",
   notes: recipe.notes ? recipe.notes : "",
+  trashed: recipe.trashed,
 });
 
 /* Helper functions to generate placeholder text */

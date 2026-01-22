@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const promises = keys.map((key) => storage.getItem(key));
   const allRecipes = await Promise.all(promises);
   const myRecipes = allRecipes.filter((el) => el.author === user.id)
-  const recipes = myRecipes.filter((el) => el.trashed);
+  const recipes = myRecipes.filter((el) => !el.trashed);
   return {
     status: "succes",
     data: { recipes },

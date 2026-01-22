@@ -8,7 +8,7 @@
           <div class="submenu left">
             <NuxtLink
               :to="`/${recipe.id}-${returnUri(recipe.title)}/edit`"
-              v-if="loggedIn"
+              v-if="loggedIn && user.id == recipe.author"
               >Edit</NuxtLink
             >
           </div>
@@ -38,7 +38,7 @@
 </template>
 
 <script setup>
-const { loggedIn } = useUserSession();
+const { loggedIn, user } = useUserSession();
 import { returnUri } from "~/layouts/default.vue";
 const route = useRoute();
 const recipeId = route.params.id;

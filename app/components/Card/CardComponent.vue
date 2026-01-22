@@ -7,7 +7,7 @@
     <h2>
       {{ recipe.title }}
     </h2>
-    <p>{{ recipe.description }}</p>
+    <p v-if="recipe.description">{{ recipe.description }}</p>
   </NuxtLink>
 </template>
 
@@ -32,17 +32,12 @@ a.card {
   gap: 0rem;
   align-items: flex-start;
   transition: all 0.2s ease-out;
-  h2,
-  p {
-    padding: 1rem 1.5rem;
-    color: var(--col-text);
-    width: 100%;
-    margin: 0;
-  }
   h2 {
     flex-grow: 2;
-    font-size: 1.17em;
     align-content: center;
+    padding: 1rem 1.5rem;
+    width: 100%;
+    margin: 0;
   }
   p {
     font-size: 0.875rem;
@@ -50,6 +45,7 @@ a.card {
     background-color: var(--col-bg);
     width: 100%;
     margin: 0;
+    padding: 1rem 1.5rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
