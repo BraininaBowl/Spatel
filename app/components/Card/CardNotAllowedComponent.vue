@@ -1,5 +1,5 @@
 <template>
-    <section>
+    <section class="area">
     <h2>You shouldn't be here.</h2>
     <p><NuxtLink to="/">Return home</NuxtLink></p>
     </section>
@@ -9,10 +9,13 @@
 </script>
 
 <style lang="css" scoped>
-    section {
-        padding: 0.5rem 0;
-        margin: 2rem 0 0;
-        border-top: 1px solid var(--col-border);
-        border-bottom: 1px solid var(--col-border);
-    }
+.area {
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+h2, p {
+    margin: 0;
+}
 </style>

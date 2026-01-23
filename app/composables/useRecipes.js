@@ -8,7 +8,6 @@ export const useRecipes = () => {
     try {
       response = await $fetch(`/api/recipes`);
     } catch (error) {
-      console.log(error);
       recipes.value = [];
     } finally {
       let data = response.data.recipes;
@@ -29,7 +28,6 @@ export const useRecipes = () => {
     try {
       response = await $fetch(`/api/myRecipes`);
     } catch (error) {
-      console.log(error);
       recipes.value = [];
     } finally {
       let data = response.data.recipes;
@@ -70,7 +68,6 @@ export const useRecipes = () => {
     try {
       response = await $fetch(`/api/recipe/${id}`);
     } catch (error) {
-      console.log(error);
     } finally {
       recipe.value = response.data.recipe;
       status.value = response.status;

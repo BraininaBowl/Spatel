@@ -54,18 +54,22 @@ export default defineNuxtConfig({
       recipeStore: {
         driver: "fs",
         base: "server/data/recipes",
+        ignore: ".*"
       },
       userStore: {
         driver: "fs",
         base: "server/data/users",
+        ignore: ".*"
       },
       userWhitelistStore: {
         driver: "fs",
         base: "server/data/user_whitelist",
+        ignore: ".*"
       },
       userBlacklistStore: {
         driver: "fs",
         base: "server/data/user_blacklist",
+        ignore: ".*"
       },
     },
   },

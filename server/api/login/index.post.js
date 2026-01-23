@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     if (await verifyPassword(user.password, body.password)) {
       await setUserSession(event, {
         user: {
-          name: user.username,
+          name: user.name,
           email: user.email,
           id: user.id,
         },

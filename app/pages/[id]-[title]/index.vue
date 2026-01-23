@@ -22,11 +22,11 @@
         </section>
         <section v-if="recipe.ingredients">
           <p class="label">Ingredients</p>
-          <ul v-html="stringToList(recipe.ingredients)"></ul>
+          <ul class="area" v-html="stringToList(recipe.ingredients)"></ul>
         </section>
         <section v-if="recipe.instructions">
           <p class="label">Instructions</p>
-          <ol v-html="stringToList(recipe.instructions)"></ol>
+          <ol class="area" v-html="stringToList(recipe.instructions)"></ol>
         </section>
         <section v-if="recipe.notes">
           <p class="label">Notes</p>
@@ -73,13 +73,8 @@ onMounted(() => {
     gap: 0rem;
 
     p.area,
-    ol,
-    ul {
-      border: 1px solid var(--col-border);
-      background-color: var(--col-area-bg);
-      border-radius: 4px;
-      padding: 0.75rem 0.75rem;
-      margin: 0;
+    ol.area,
+    ul.area {
       display: flex;
       flex-direction: column;
       gap: 0.5rem;

@@ -43,10 +43,10 @@ export default defineEventHandler(async (event) => {
     return foundUser;
   }
 
-  async function checkUsername(username) {
+  async function checkname(name) {
     let foundUser = false;
     allUsers.forEach((user) => {
-      if (user.username === username) {
+      if (user.name === name) {
         foundUser = true;
       }
     });
@@ -62,15 +62,15 @@ export default defineEventHandler(async (event) => {
   const whitelisted = await checkWhitelist(body.email);
   const blacklisted = await checkBlacklist(body.email);
   const duplicateEmail = await checkEmail(body.email);
-  const duplicateUsername = await checkUsername(body.username);
+  const duplicatename = await checkname(body.name);
   if (whitelisted === false || blacklisted === true) {
     response.message = "Email address not allowed."
     response.type = "error"
   } else if (duplicateEmail === true) {
     response.message = "Duplicate email."
     response.type = "error"
-  } else if (duplicateUsername === true) {
-    response.message = "Duplicate username."
+  } else if (duplicatename === true) {
+    response.message = "Duplicate name."
     response.type = "error"
   } else {
     if (!body.id) {

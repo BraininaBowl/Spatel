@@ -1,26 +1,33 @@
 <template>
-  <main class="index" v-if="loggedIn">
+  <main class="index">
     <h1>Edit recipe</h1>
-    <div class="loading" v-if="!recipe">Loading...</div>
-    <FormRecipeComponent :recipe="recipe" v-else-if="user.id === recipe.author" />
-    <CardNotAllowedComponent v-else />
+    <section v-if="loggedIn">
+      <div class="loading" v-if="!recipe">Loading...</div>
+      <FormRecipeComponent
+        :recipe="recipe"
+        v-else-if="user.id === recipe.author"
+      />
+      <CardNotAllowedComponent v-else />
+    </section>
+    <section v-else>
+      <div class="page_options">
+        <div class="submenu left"></div>
+        <NavigationOptionsRightComponent />
+      </div>
+      <CardNotAllowedComponent />
+    </section>
   </main>
-  <div v-else>
-    <CardNotAllowedComponent />
-  </div>
 </template>
 
 <script setup>
-import CardNotAllowedComponent from '~/components/Card/CardNotAllowedComponent.vue';
+import CardNotAllowedComponent from "~/components/Card/CardNotAllowedComponent.vue";
 
 const route = useRoute();
 const recipeId = route.params.id;
 const { recipe, fetchRecipe, fetchRecipes } = useRecipes();
 const { loggedIn, user } = useUserSession();
 await fetchRecipe(recipeId);
-console.log ("user: ", user )
-onMounted(() => {
-});
+onMounted(() => {});
 </script>
 
 <style lang="css" scoped></style>

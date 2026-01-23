@@ -41,6 +41,11 @@ nav {
   padding: 0;
   justify-content: space-between;
   align-items: center;
+
+  .nav_link {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
 }
 </style>
 

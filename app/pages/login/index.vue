@@ -1,6 +1,10 @@
 <template>
   <main>
     <h1>Login</h1>
+    <div class="page_options">
+      <div class="submenu left"></div>
+      <NavigationOptionsRightComponent />
+    </div>
     <form @submit.prevent="login">
       <FormInputComponent
         v-model="credentials.email"
@@ -10,7 +14,7 @@
           placeholder: 'email@address.com',
           requiredField: true,
           id: useId(),
-          disabledField: false,
+          disabledField: loggedIn,
           autocomplete: 'email',
         }"
       />
@@ -22,7 +26,7 @@
           placeholder: '******************',
           requiredField: true,
           id: useId(),
-          disabledField: false,
+          disabledField: loggedIn,
           autocomplete: 'current-password',
         }"
       />
@@ -34,7 +38,7 @@
 
 <script setup>
 import { addNotification } from "~/layouts/default.vue";
-const { loggedIn, user, fetch: refreshSession } = useUserSession();
+const { fetch: refreshSession, loggedIn } = useUserSession();
 const { checkLogin } = useAccounts();
 const credentials = reactive({
   email: "",

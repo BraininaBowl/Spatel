@@ -32,7 +32,8 @@ a.card {
   gap: 0rem;
   align-items: flex-start;
   transition: all 0.2s ease-out;
-  h2 {
+
+h2 {
     flex-grow: 2;
     align-content: center;
     padding: 1rem 1.5rem;

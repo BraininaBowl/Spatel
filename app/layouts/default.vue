@@ -92,6 +92,14 @@ main {
   border: 0;
 }
 
+.area {
+  border: 1px solid var(--col-border);
+  background-color: var(--col-area-bg);
+  border-radius: 4px;
+  padding: 0.75rem 0.75rem;
+  margin: 0 0 1rem 0;
+}
+
 .page_options {
   display: flex;
   flex-direction: row;
@@ -108,7 +116,7 @@ main {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    gap: 2rem;
+    gap: 1rem;
 
     .item {
       display: flex;
@@ -132,6 +140,7 @@ h1 {
 }
 
 h2 {
+  margin: 3rem 0 1.5rem;
   color: var(--col-text);
   font-size: 1.17em;
 }
