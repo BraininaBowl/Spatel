@@ -1,9 +1,24 @@
-![The Spatel logo](app/images/logo_spatel.svg)
+![The Spatel logo](images/spatel.png)
 
 # Spatel
 
-A simple recipe database written in Vue/Nuxt.
+A minimal recipe collection system written in Vue/Nuxt. Allows the user to register an account and add, print and edit recipes. No database required.
 
+## Usage
+
+Build and install to your host of choice, then run.
+
+### Adding recipes
+
+After signing up and logging in, you can add recipes with the "New recipe" button in the top right. All recipes are saved as json files in the server/data/recipes folder.
+
+### User management
+
+All users accounts are saved as json files in the server/data/users folder. A user management page is still on my to-do. You can whitelist and blacklist users by creating an empty file with the email address as the filename in the server/data/user_blacklist or server/data/user_whitelist folder. 
+
+### Email functionality
+
+Email account confirmation and password recovery have not been implemented yet.
 
 ## Setup
 
