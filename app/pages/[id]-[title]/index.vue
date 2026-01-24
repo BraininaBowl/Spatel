@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <main>
     <div class="loader" v-if="!recipe">Loading...</div>
     <article class="recipe" v-else>
       <header>
@@ -15,7 +15,7 @@
           <NavigationOptionsRightComponent />
         </div>
       </header>
-      <main>
+      <div class="details">
         <section v-if="recipe.description">
           <p class="label">Description</p>
           <p class="area" v-html="stringToBreak(recipe.description)"></p>
@@ -32,9 +32,9 @@
           <p class="label">Notes</p>
           <p class="area" v-html="stringToBreak(recipe.notes)"></p>
         </section>
-      </main>
+      </div>
     </article>
-  </div>
+  </main>
 </template>
 
 <script setup>
@@ -62,7 +62,7 @@ onMounted(() => {
   flex-direction: column;
   gap: 0rem;
 }
-.recipe main {
+.recipe .details {
   display: flex;
   flex-direction: column;
   gap: 1rem;

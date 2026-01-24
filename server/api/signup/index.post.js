@@ -64,22 +64,29 @@ export default defineEventHandler(async (event) => {
   const duplicateEmail = await checkEmail(body.email);
   const duplicatename = await checkname(body.name);
   if (Allowed === false || Denyed === true) {
-    response.message = "Email address not allowed."
-    response.type = "error"
+    response.message = "Email address not allowed.";
+    response.type = "error";
   } else if (duplicateEmail === true) {
-    response.message = "Duplicate email."
-    response.type = "error"
+    response.message = "Duplicate email.";
+    response.type = "error";
   } else if (duplicatename === true) {
-    response.message = "Duplicate name."
-    response.type = "error"
+    response.message = "Duplicate name.";
+    response.type = "error";
   } else {
     if (!body.id) {
       body.id = await getNewId();
     }
     body.password = await hashPassword(body.password);
     await storage.setItem(body.id + ".json", body);
-    response.message = "Account created."
-    response.type = "success"
+    response.message = "Account created.";
+    response.type = "success";
+    await setUserSession(event, {
+      user: {
+        name: user.name,
+        email: user.email,
+        id: user.id,
+      },
+    });
   }
   return response;
 });
