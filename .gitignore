@@ -30,7 +30,7 @@ server/data/recipes/*
 !server/data/recipes/.gitkeep
 server/data/users/*
 !server/data/users/.gitkeep
-server/data/user_whitelist/*
-!server/data/user_whitelist/.gitkeep
-server/data/user_blacklist/*
-!server/data/user_blacklist/.gitkeep
+server/data/user_Allow/*
+!server/data/user_Allow/.gitkeep
+server/data/user_Deny/*
+!server/data/user_Deny/.gitkeep

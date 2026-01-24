@@ -4,6 +4,9 @@
 
 A minimal recipe collection system written in Vue/Nuxt. Allows the user to register an account and add, print and edit recipes. No database required.
 
+![A screenshot of the interface](images/spatel-screenshot.png)
+
+
 ## Usage
 
 Build and install to your host of choice, then run.
@@ -14,7 +17,7 @@ After signing up and logging in, you can add recipes with the "New recipe" butto
 
 ### User management
 
-All users accounts are saved as json files in the server/data/users folder. A user management page is still on my to-do. You can whitelist and blacklist users by creating an empty file with the email address as the filename in the server/data/user_blacklist or server/data/user_whitelist folder. 
+All users accounts are saved as json files in the server/data/users folder. A user management page is still on my to-do. You can allow or deny users by adding the email address as an empty file in the server/data/user_Deny or server/data/user_Allow folder. 
 
 ### Email functionality
 

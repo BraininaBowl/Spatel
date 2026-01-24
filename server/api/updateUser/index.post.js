@@ -14,8 +14,8 @@ export default defineEventHandler(async (event) => {
     return userData;
   }
 
-  async function checkWhitelist(email) {
-    const keys = await whitelist.keys();
+  async function checkAllow(email) {
+    const keys = await Allow.keys();
     const result = keys.includes(email);
     if (keys === undefined || keys.length == 0 || result) {
       return true;
@@ -24,8 +24,8 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  async function checkBlacklist(email) {
-    const keys = await blacklist.keys();
+  async function checkDeny(email) {
+    const keys = await Deny.keys();
     const result = keys.includes(email);
     return result;
   }
@@ -69,8 +69,8 @@ export default defineEventHandler(async (event) => {
   const storage = useStorage("userStore");
   const allUsers = await getUsers();
   const userData = await getUser();
-  const whitelist = useStorage("userWhitelistStore");
-  const blacklist = useStorage("userBlacklistStore");
+  const Allow = useStorage("userAllowStore");
+  const Deny = useStorage("userDenyStore");
 
   if (body.newPassword) {
     if (await verifyPassword(userData.password, body.oldPassword)) {
@@ -92,11 +92,11 @@ export default defineEventHandler(async (event) => {
   }
 
   if (body.email) {
-    const whitelisted = await checkWhitelist(body.email);
-    const blacklisted = await checkBlacklist(body.email);
+    const Allowed = await checkAllow(body.email);
+    const Denyed = await checkDeny(body.email);
     const duplicateEmail = checkEmail(body.email);
     const duplicatename = checkname(body.name);
-    if (whitelisted === false || blacklisted === true) {
+    if (Allowed === false || Denyed === true) {
       response.message = "Email address not allowed.";
       response.type = "error";
     } else if (duplicateEmail === true) {

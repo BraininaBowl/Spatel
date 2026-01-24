@@ -61,14 +61,14 @@ export default defineNuxtConfig({
         base: "server/data/users",
         ignore: ".*"
       },
-      userWhitelistStore: {
+      userAllowStore: {
         driver: "fs",
-        base: "server/data/user_whitelist",
+        base: "server/data/user_Allow",
         ignore: ".*"
       },
-      userBlacklistStore: {
+      userDenyStore: {
         driver: "fs",
-        base: "server/data/user_blacklist",
+        base: "server/data/user_Deny",
         ignore: ".*"
       },
     },

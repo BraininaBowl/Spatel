@@ -17,8 +17,8 @@ export default defineEventHandler(async (event) => {
     return allUsers;
   }
 
-  async function checkWhitelist(email) {
-    const keys = await whitelist.keys();
+  async function checkAllow(email) {
+    const keys = await Allow.keys();
     const result = keys.includes(email);
     if (keys === undefined || keys.length == 0 || result) {
       return true;
@@ -27,8 +27,8 @@ export default defineEventHandler(async (event) => {
     }
   }
 
-  async function checkBlacklist(email) {
-    const keys = await blacklist.keys();
+  async function checkDeny(email) {
+    const keys = await Deny.keys();
     const result = keys.includes(email);
     return result;
   }
@@ -56,14 +56,14 @@ export default defineEventHandler(async (event) => {
   let response = {};
   const body = await readBody(event);
   const storage = useStorage("userStore");
-  const whitelist = useStorage("userWhitelistStore");
-  const blacklist = useStorage("userBlacklistStore");
+  const Allow = useStorage("userAllowStore");
+  const Deny = useStorage("userDenyStore");
   const allUsers = await getUsers();
-  const whitelisted = await checkWhitelist(body.email);
-  const blacklisted = await checkBlacklist(body.email);
+  const Allowed = await checkAllow(body.email);
+  const Denyed = await checkDeny(body.email);
   const duplicateEmail = await checkEmail(body.email);
   const duplicatename = await checkname(body.name);
-  if (whitelisted === false || blacklisted === true) {
+  if (Allowed === false || Denyed === true) {
     response.message = "Email address not allowed."
     response.type = "error"
   } else if (duplicateEmail === true) {
