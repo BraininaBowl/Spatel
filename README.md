@@ -9,7 +9,7 @@ A minimal recipe collection system written in Vue/Nuxt. Allows the user to regis
 
 ## Usage
 
-Build and install to your host of choice, then run.
+Build and install to your host of choice, then run. If you fork this repository, it's supposed to be really easy to automatically deploy from GitHub to Vercel or Render. I haven't tried that myself, so your milage may vary.
 
 ### Adding recipes
 
