@@ -19,6 +19,17 @@
         disabledField: formData.trashed,
       }"
     />
+    <FormInputComponent
+      v-model="formData.source"
+      :formfieldData="{
+        typeField: 'text',
+        label: 'Source',
+        placeholder: formSourcePlaceholder,
+        requiredField: false,
+        id: useId(),
+        disabledField: formData.trashed,
+      }"
+    />
     <FormTextareaComponent
       v-model="formData.description"
       :formfieldData="{
@@ -132,7 +143,7 @@ const trashRecipe = async function () {
   status.finally(() => {
     addNotification("Recipe trashed successfully.", "success");
   });
-  await refreshNuxtData()
+  await refreshNuxtData();
 };
 
 const restoreRecipe = async function () {
@@ -145,7 +156,7 @@ const restoreRecipe = async function () {
   status.finally(() => {
     addNotification("Recipe restored successfully.", "success");
   });
-  await refreshNuxtData()
+  await refreshNuxtData();
 };
 
 const formData = ref({
@@ -154,6 +165,7 @@ const formData = ref({
   added: recipe.added ? recipe.added : new Date(),
   edited: new Date(),
   title: recipe.title ? recipe.title : "",
+  source: recipe.source ? recipe.source : "",
   description: recipe.description ? recipe.description : "",
   ingredients: recipe.ingredients ? recipe.ingredients : "",
   instructions: recipe.instructions ? recipe.instructions : "",
@@ -246,7 +258,36 @@ function getRecipePlaceholderName() {
     "" +
       (Math.random() < 0.7 ? getRandomItemFromArray(pre) + " " : "") +
       getRandomItemFromArray(main) +
-      (Math.random() < 0.7 ? getRandomItemFromArray(post) : "")
+      (Math.random() < 0.7 ? getRandomItemFromArray(post) : ""),
+  );
+}
+function getRecipePlaceholderSource() {
+  const pre = [
+    "from ",
+    "inspired by ",
+    "found in ",
+  ];
+  const descriptor = [
+    "a dusty old ",
+    "my mother's ",
+    "my father's ",
+    "my favorite ",
+    
+  ];
+  const where = [
+    "attic.",
+    "cookbook.",
+    "website.",
+    "blog.",
+    "vlog.",
+    "text message.",
+    "restaurant.",
+  ];
+  return toSentenceCase(
+    "" +
+      getRandomItemFromArray(pre) + 
+      getRandomItemFromArray(descriptor) +
+      getRandomItemFromArray(where)
   );
 }
 function getRecipePlaceholderDescription() {
@@ -324,7 +365,7 @@ function getRecipePlaceholderDescription() {
       (Math.random() < 0.7 ? getRandomItemFromArray(pre) : "") +
       getRandomItemFromArray(main) +
       (Math.random() < 0.7 ? getRandomItemFromArray(post) : "") +
-      "."
+      ".",
   );
 }
 function getRecipePlaceholderIngredients() {
@@ -431,6 +472,7 @@ function getRecipePlaceholderNotes() {
   return getRandomItemFromArray(notes);
 }
 const formTitlePlaceholder = getRecipePlaceholderName();
+const formSourcePlaceholder = getRecipePlaceholderSource()
 const formDescriptionPlaceholder = getRecipePlaceholderDescription();
 const formIngredientsPlaceholder = getRecipePlaceholderIngredients();
 const formInstructionsPlaceholder = getRecipePlaceholderInstructions();

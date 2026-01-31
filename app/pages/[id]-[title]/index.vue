@@ -16,6 +16,10 @@
         </div>
       </header>
       <div class="details">
+        <section v-if="recipe.source">
+          <p class="label">Source</p>
+          <p class="area" v-html="stringToBreak(recipe.source)"></p>
+        </section>
         <section v-if="recipe.description">
           <p class="label">Description</p>
           <p class="area" v-html="stringToBreak(recipe.description)"></p>
