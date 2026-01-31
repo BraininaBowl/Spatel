@@ -18,7 +18,6 @@ defineProps({
     required: true,
   },
 });
-import { returnUri } from "~/layouts/default.vue";
 </script>
 
 <style lang="css" scoped>

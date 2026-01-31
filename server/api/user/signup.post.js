@@ -80,12 +80,18 @@ export default defineEventHandler(async (event) => {
     await storage.setItem(body.id + ".json", body);
     response.message = "Account created.";
     response.type = "success";
+    response.id = body.id;
     await setUserSession(event, {
       user: {
-        name: user.name,
-        email: user.email,
-        id: user.id,
+        name: body.name,
+        email: body.email,
+        id: body.id,
       },
+    });
+
+    await $fetch("/api/sendVerificationMail", {
+      method: "POST",
+      body: body.id,
     });
   }
   return response;

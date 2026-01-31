@@ -47,7 +47,19 @@ export default defineNuxtConfig({
     "@nuxt/a11y",
     "@nuxt/eslint",
     "nuxt-auth-utils",
+    "nuxt-nodemailer",
   ],
+
+  nodemailer: {
+    from: '"Spatel" <spatel@braininabowl.com>',
+    host: 'mail.braininabowl.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: 'spatel@braininabowl.com',
+      pass: 'EcVsa6eJzW9FPT45rnj5FPT45rnj5Vsa6eJzW9FPT',
+    },
+  },
 
   nitro: {
     storage: {

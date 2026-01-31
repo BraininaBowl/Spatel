@@ -6,6 +6,16 @@
       <NavigationOptionsRightComponent />
     </div>
     <div v-if="loggedIn">
+      <div v-if="!userDataOnServer.verified">
+        <h2>Verify account</h2>
+        <form class="area" @submit.prevent="verifyUser">
+          <p>
+            You need to verify your account before you can add recipes. Please
+            check your email for a verification link.
+          </p>
+          <button type="submit">Resend verification mail</button>
+        </form>
+      </div>
       <h2>Update profile</h2>
       <form class="area" @submit.prevent="updateData">
         <FormInputComponent
@@ -68,17 +78,22 @@
 </template>
 
 <script setup>
-import { addNotification } from "~/layouts/default.vue";
 const { loggedIn, fetch: refreshSession, user } = useUserSession();
-const { updateUser } = useAccounts();
+const { updateUser, getUserData, sendVerificationMail } = useAccounts();
+const userDataOnServer = await getUserData(user.id);
 const userData = reactive({
-  name: user.value.name,
-  email: user.value.email,
+  name: userDataOnServer.name,
+  email: userDataOnServer.email,
 });
+
 const credentials = reactive({
   oldPassword: "",
   newPassword: "",
 });
+async function verifyUser() {
+  const response = await sendVerificationMail(user.value.id);
+  addNotification(response.message, response.type);
+}
 
 async function updateData() {
   const response = await updateUser(userData);

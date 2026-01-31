@@ -7,28 +7,6 @@
   </div>
 </template>
 
-<script>
-function addNotification(message, type = "info") {
-  const notificationsArea = document.querySelector("#notifications");
-  if (notificationsArea) {
-    const notification = document.createElement("div");
-    notification.classList.add(`notification`);
-    notification.classList.add(`${type}`);
-    notification.innerText = message;
-    notificationsArea.appendChild(notification);
-    setTimeout(() => {
-      notificationsArea.removeChild(notification);
-    }, 7000);
-  }
-}
-
-function returnUri(string) {
-  return encodeURIComponent(string.trim().toLowerCase().replace(/\s+/g, "-"));
-}
-
-export { addNotification, returnUri };
-</script>
-
 <script setup>
 const { loggedIn, session, user, clear, fetch } = useUserSession();
 </script>
@@ -98,6 +76,9 @@ main {
   border-radius: 4px;
   padding: 0.75rem 0.75rem;
   margin: 0 0 1rem 0;
+  p {
+    margin: 0;
+  }
 }
 
 .page_options {
@@ -188,7 +169,7 @@ button:hover,
 .button:hover {
   background-color: var(--col-link-hover);
   color: var(--col-button-text);
-  border-radius: 1rem;
+  border-radius: 0.1rem;
   box-shadow:
     0 0.3rem 0.6rem rgba(0, 0, 0, 0.2),
     0 0.1rem 0.1rem rgba(0, 0, 0, 0.1);

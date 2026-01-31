@@ -101,8 +101,6 @@
 </template>
 
 <script setup>
-import { addNotification } from "~/layouts/default.vue";
-import NavigationOptionsRightComponent from "../Navigation/NavigationOptionsRightComponent.vue";
 
 const props = defineProps({
   recipe: {

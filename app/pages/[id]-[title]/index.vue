@@ -39,7 +39,6 @@
 
 <script setup>
 const { loggedIn, user } = useUserSession();
-import { returnUri } from "~/layouts/default.vue";
 const route = useRoute();
 const recipeId = route.params.id;
 const { recipe, fetchRecipe, fetchRecipes, writeRecipe } = useRecipes();
