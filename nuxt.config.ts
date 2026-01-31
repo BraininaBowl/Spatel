@@ -50,14 +50,15 @@ export default defineNuxtConfig({
     "nuxt-nodemailer",
   ],
 
+  // set your email settings here, or even better, add them as environment variables as explained in https://github.com/kleinpetr/nuxt-nodemailer
   nodemailer: {
-    from: '"Spatel" <spatel@braininabowl.com>',
-    host: 'mail.braininabowl.com',
+    from: '"Spatel" <spatel@example.com>',
+    host: 'mail.example.com',
     port: 587,
     secure: false,
     auth: {
-      user: 'spatel@braininabowl.com',
-      pass: 'EcVsa6eJzW9FPT45rnj5FPT45rnj5Vsa6eJzW9FPT',
+      user: 'spatel@example.com',
+      pass: 'Strong_password_here',
     },
   },
 
