@@ -21,7 +21,7 @@ All users accounts are saved as json files in the server/data/users folder. A us
 
 ### Email functionality
 
-Email account confirmation and password recovery have not been implemented yet.
+New accounts require email confirmation. You can set your email settings in the nuxt.config.ts file.
 
 ## Setup
 
