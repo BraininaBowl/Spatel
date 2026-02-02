@@ -40,7 +40,7 @@ body {
 }
 
 .default_template {
-  font-family: "PT Serif", serif;
+  font-family: "HyperlegibleSans";
   font-size: 1rem;
   margin: 0 auto;
   max-width: 120ch;
@@ -81,7 +81,9 @@ main {
   }
 }
 
-.page_options {
+.page_options,
+footer {
+  font-family: "PT Serif", serif;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -90,6 +92,16 @@ main {
   border-top: 1px solid var(--col-border);
   border-bottom: 1px solid var(--col-border);
   margin: 0 0 1.5rem 0;
+
+  ul {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
   p {
     margin: 0;
   }
@@ -108,7 +120,6 @@ main {
 
   select,
   input {
-    font-family: "PT Serif", serif;
     font-size: 0.8rem;
     padding: 0 0.5rem 0 0;
     border: 1px solid #ccc;
@@ -118,12 +129,14 @@ main {
 
 h1 {
   margin: 3rem 0 1.5rem;
+  font-family: "PT Serif", serif;
 }
 
 h2 {
   margin: 3rem 0 1.5rem;
   color: var(--col-text);
   font-size: 1.17em;
+  font-family: "PT Serif", serif;
 }
 
 /* Links */
@@ -194,18 +207,27 @@ button::before,
   position: fixed;
   top: 1rem;
   right: 1rem;
+  left: 1rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 0.5rem;
   z-index: 1000;
+  pointer-events: none;
 }
 
 .notification {
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 1.5rem;
   color: var(--col-text);
   border-radius: 4px;
   border: 1px solid var(--col-border);
   background-color: var(--col-area-bg);
+  transition: all 0.25s ease-in-out;
+}
+
+.notification.fade {
+  opacity: 0;
+  margin-top: -3rem;
 }
 
 .notification::before {
@@ -249,6 +271,7 @@ fieldset {
 label,
 legend,
 .label {
+  font-family: "PT Serif", serif;
   font-weight: bold;
   font-size: 0.9rem;
   margin: 0;
@@ -269,7 +292,7 @@ form .help-text {
 
 input,
 textarea {
-  font-family: "PT Serif", serif;
+  font-family: "HyperlegibleSans";
   font-size: 1rem;
   padding: 0.5rem;
   border: 1px solid #ccc;

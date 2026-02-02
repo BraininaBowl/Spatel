@@ -80,7 +80,7 @@
 <script setup>
 const { loggedIn, fetch: refreshSession, user } = useUserSession();
 const { updateUser, getUserData, sendVerificationMail } = useAccounts();
-const userDataOnServer = await getUserData(user.id);
+const userDataOnServer = await getUserData(user.value.id);
 const userData = reactive({
   name: userDataOnServer.name,
   email: userDataOnServer.email,
