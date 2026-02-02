@@ -48,7 +48,8 @@
 </template>
 
 <script setup>
-import { addNotification } from "~/layouts/default.vue";
+
+
 const { fetch: refreshSession } = useUserSession();
 const { createUser } = useAccounts();
 const credentials = reactive({
@@ -60,6 +61,9 @@ const credentials = reactive({
 async function signup() {
   const response = await createUser(credentials);
   addNotification(response.message, response.type);
+  if (response.type === "success") {
+    navigateTo("/profile/");
+  }
 }
 </script>
 

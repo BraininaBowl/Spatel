@@ -6,7 +6,7 @@ export const useRecipes = () => {
   async function fetchRecipes(sort) {
     let response = [];
     try {
-      response = await $fetch(`/api/recipes`);
+      response = await $fetch(`/api/recipes/all`);
     } catch (error) {
       recipes.value = [];
     } finally {
@@ -26,7 +26,7 @@ export const useRecipes = () => {
   async function fetchMyRecipes(sort) {
     let response = [];
     try {
-      response = await $fetch(`/api/myRecipes`);
+      response = await $fetch(`/api/recipes/mine`);
     } catch (error) {
       recipes.value = [];
     } finally {
@@ -46,7 +46,7 @@ export const useRecipes = () => {
   async function fetchTrashed(sort) {
     let response = [];
     try {
-      response = await $fetch(`/api/trashed`);
+      response = await $fetch(`/api/recipes/trash`);
     } catch (error) {
       recipes.value = [];
     } finally {

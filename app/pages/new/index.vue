@@ -11,7 +11,12 @@
 </template>
 
 <script setup>
-const { loggedIn } = useUserSession();
+const { loggedIn, user } = useUserSession();
+const { getUserData } = useAccounts();
+const userData = await getUserData(user.value.id);
+if (!userData.verified) {
+  navigateTo("/profile");
+}
 </script>
 
 <style lang="css" scoped></style>

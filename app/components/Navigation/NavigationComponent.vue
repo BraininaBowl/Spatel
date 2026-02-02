@@ -16,7 +16,11 @@
     <div class="submenu right">
       <ul>
         <li v-if="loggedIn">
-          <NuxtLink to="/new" class="nav_link link button">New recipe</NuxtLink>
+          <NuxtLink
+            to="/new"
+            class="nav_link link button"
+            >New recipe</NuxtLink
+          >
         </li>
       </ul>
     </div>
@@ -45,10 +49,12 @@ nav {
   .nav_link {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
+    font-family: "PT Serif", serif;
   }
 }
 </style>
 
 <script setup>
-const { loggedIn } = useUserSession();
+const { loggedIn, user } = useUserSession();
+
 </script>

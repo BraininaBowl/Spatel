@@ -33,7 +33,7 @@ export default defineEventHandler(async (event) => {
   function checkEmail(email) {
     let foundUser = false;
     allUsers.forEach((user) => {
-      if (user.email === email && user.id != userData.id) {
+      if (user.email === email && user.id != newData.id) {
         foundUser = true;
       }
     });
@@ -43,7 +43,7 @@ export default defineEventHandler(async (event) => {
   function checkname(name) {
     let foundUser = false;
     allUsers.forEach((user) => {
-      if (user.name === name && user.id != userData.id) {
+      if (user.name === name && user.id != newData.id) {
         foundUser = true;
       }
     });
@@ -61,64 +61,65 @@ export default defineEventHandler(async (event) => {
     });
   }
 
-  let response = {};
+  function toSentenceCase(text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+  }
+
+  const response = new Object();
   response.message = "Nothing to update.";
-  response.type = "error";
+  response.type = "info";
   const body = await readBody(event);
-  const newData = {};
   const storage = useStorage("userStore");
   const allUsers = await getUsers();
-  const userData = await getUser();
+  const newData = await getUser();
   const Allow = useStorage("userAllowStore");
   const Deny = useStorage("userDenyStore");
+  const changes = new Array();
+  const errors = new Array();
 
   if (body.newPassword) {
-    if (await verifyPassword(userData.password, body.oldPassword)) {
-      if (userData.admin) {
-        newData.admin = true;
-      }
-      newData.id = userSession.id;
-      newData.email = userData.email;
-      newData.name = userData.name;
+    if (await verifyPassword(newData.password, body.oldPassword)) {
       newData.password = await hashPassword(body.newPassword);
-      await storage.setItem(newData.id + ".json", newData);
-      await localSessionUpdate();
-      response.message = "Password updated.";
-      response.type = "success";
+      changes.push("password");
     } else {
-      response.message = "Current password incorrect.";
-      response.type = "error";
+      errors.push("current password incorrect");
     }
   }
 
-  if (body.email) {
+  if (body.email && body.email != newData.email) {
     const Allowed = await checkAllow(body.email);
     const Denyed = await checkDeny(body.email);
     const duplicateEmail = checkEmail(body.email);
-    const duplicatename = checkname(body.name);
     if (Allowed === false || Denyed === true) {
-      response.message = "Email address not allowed.";
-      response.type = "error";
+      errors.push("email address not allowed");
     } else if (duplicateEmail === true) {
-      response.message = "Duplicate email.";
-      response.type = "error";
-    } else if (duplicatename === true) {
-      response.message = "Duplicate name.";
+      errors.push("duplicate email");
       response.type = "error";
     } else {
-      if (userData.admin) {
-        newData.admin = true;
-      }
-      newData.password = userData.password;
-      newData.id = userSession.id;
       newData.email = body.email;
-      newData.name = body.name;
-      await storage.setItem(newData.id + ".json", newData);
-      await localSessionUpdate();
-      response.message = "Profile updated.";
-      response.type = "success";
+      changes.push("email");
     }
   }
 
+  if (body.name && body.name != newData.name) {
+    const duplicatename = checkname(body.name);
+    if (duplicatename === true) {
+      errors.push("duplicate name");
+    } else {
+      newData.name = body.name;
+      changes.push("username");
+    }
+  }
+
+  if (errors.length > 0) {
+    response.message = toSentenceCase(errors.toString() + ".");
+    response.type = "error";
+  } else if (changes.length > 0) {
+    response.message = toSentenceCase(changes.toString() + " updated.");
+    response.type = "success";
+  }
+
+  await storage.setItem(newData.id + ".json", newData);
+  await localSessionUpdate();
   return response;
 });

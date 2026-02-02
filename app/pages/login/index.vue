@@ -37,7 +37,6 @@
 </template>
 
 <script setup>
-import { addNotification } from "~/layouts/default.vue";
 const { fetch: refreshSession, loggedIn } = useUserSession();
 const { checkLogin } = useAccounts();
 const credentials = reactive({
@@ -49,6 +48,9 @@ async function login() {
   const response = await checkLogin(credentials);
   refreshSession();
   addNotification(response.message, response.type);
+  if (response.type ==="success") {
+    navigateTo('/');
+  }
 }
 </script>
 

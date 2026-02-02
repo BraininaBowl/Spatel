@@ -47,7 +47,20 @@ export default defineNuxtConfig({
     "@nuxt/a11y",
     "@nuxt/eslint",
     "nuxt-auth-utils",
+    "nuxt-nodemailer",
   ],
+
+  // set your email settings here, or even better, add them as environment variables as explained in https://github.com/kleinpetr/nuxt-nodemailer
+  nodemailer: {
+    from: '"Spatel" <spatel@example.com>',
+    host: 'smtp.example.com',
+    port: 587,
+    secure: false,
+    auth: {
+      user: 'spatel@example.com',
+      pass: 'Strong_password_here',
+    },
+  },
 
   nitro: {
     storage: {
