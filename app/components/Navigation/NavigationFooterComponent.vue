@@ -2,7 +2,7 @@
     <footer>
       <ul>
         <li>
-          Powered by <NuxtLink to="https://github.com/BraininaBowl/Spatel/" class="link">Spatel</NuxtLink>.
+          Powered by <NuxtLink to="https://github.com/BraininaBowl/Spatel/" class="link" target="_blank">Spatel</NuxtLink>.
         </li>
       </ul>
     </footer>

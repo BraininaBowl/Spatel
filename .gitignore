@@ -20,6 +20,7 @@ logs
 .DS_Store
 .fleet
 .idea
+start_spatel.sh
 
 # Local env files
 .env
